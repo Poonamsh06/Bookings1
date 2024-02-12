@@ -26,16 +26,16 @@ class _Text1State extends State<Text1> {
           });
         },
         child: AnimatedContainer(
-            duration: Duration(milliseconds: 200),
+            duration: const Duration(milliseconds: 200),
             curve: Curves.easeInOut,
             decoration: BoxDecoration(
               color: _isHovered
-                  ? Color.fromARGB(255, 96, 95, 96)
+                  ? const Color.fromARGB(255, 96, 95, 96)
                   : Colors.transparent,
             ),
             child: Text(
               widget.text,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
@@ -51,7 +51,7 @@ class FooterText1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
           fontSize: 19, fontWeight: FontWeight.normal, color: Colors.black),
     );
   }
@@ -65,10 +65,10 @@ class FooterText2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.normal,
-          color: const Color.fromARGB(255, 90, 89, 89)),
+          color: Color.fromARGB(255, 90, 89, 89)),
     );
   }
 }
@@ -138,5 +138,18 @@ class _DropDwnbuttonState extends State<DropDwnbutton> {
                     );
                   }).toList(),
                 ))));
+  }
+}
+
+class BookingText extends StatelessWidget {
+  const BookingText({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      'Booking Form',
+      style: TextStyle(
+          color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),
+    );
   }
 }

@@ -18,11 +18,10 @@ class _WebsiteFooterState extends State<WebsiteFooter> {
     return Center(
       child: Container(
         height: MediaQuery.of(context).size.height * 0.7,
-        width: MediaQuery.of(context).size.width * 0.98,
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             border:
                 Border.all(color: Color.fromARGB(255, 240, 236, 236), width: 1),
-            borderRadius: BorderRadius.circular(6),
             color: Color.fromARGB(255, 214, 210, 210)
             // color: Color.fromARGB(255, 213, 211, 211)
             ),
@@ -141,6 +140,9 @@ class _WebsiteFooterState extends State<WebsiteFooter> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // SizedBox(
+                    //   width: MediaQuery.of(context).size.width * 0.1,
+                    // ),
                     const FooterText1(text: "Social Links"),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.015,
@@ -149,6 +151,12 @@ class _WebsiteFooterState extends State<WebsiteFooter> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        // FooterSocialLinks(
+                        //   imagePath: 'assets/images/youtube.jpeg',
+                        // ),
+                        // SizedBox(
+                        //   width: MediaQuery.of(context).size.width * 0.01,
+                        // ),
                         FooterSocialLinks(
                           imagePath: 'assets/images/youtube.jpeg',
                         ),
