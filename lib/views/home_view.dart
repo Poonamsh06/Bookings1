@@ -1,4 +1,4 @@
-import 'package:bookings/views/bookings/Bookings.dart';
+import 'package:bookings/views/bookings/bookings.dart';
 import 'package:bookings/views/login_view.dart';
 import 'package:bookings/views/sign_up.dart';
 import 'package:bookings/widgets/app_bar.dart';
@@ -7,10 +7,8 @@ import 'package:bookings/widgets/booking_widget.dart';
 import 'package:bookings/widgets/card.dart';
 import 'package:bookings/widgets/discount_cards.dart';
 import 'package:bookings/widgets/footer.dart';
-import 'package:bookings/widgets/login_popup.dart';
-import 'package:bookings/widgets/text.dart';
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -56,7 +54,7 @@ class HomeView extends StatelessWidget {
                   child: Text(
                     "Experience the allure of trending destinations, where every corner tells a story waiting to be discovered.",
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 20,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -110,30 +108,62 @@ class HomeView extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.05,
+                height: MediaQuery.of(context).size.height * 0.1,
               ),
               //Booking form
-              Padding(
-                padding: const EdgeInsets.only(top: 50),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Stack(alignment: Alignment.centerLeft, children: [
+                Image.asset(
+                  'assets/images/boat.jpg',
+                  height: MediaQuery.of(context).size.height * 0.9,
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.fill,
+                  filterQuality: FilterQuality.low,
+
+                  colorBlendMode: BlendMode.colorBurn,
+                  //opacity:  const AlwaysStoppedAnimation(.5),,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      padding: EdgeInsets.only(
-                        left: 15,
-                      ),
-                      child: Image.asset(
-                        'assets/images/form.jpeg',
-                        height: MediaQuery.of(context).size.height * 0.8,
-                        width: MediaQuery.of(context).size.width * 0.6,
-                        fit: BoxFit.fill,
-                      ),
+                    Column(
+                      children: [
+                        const Text(
+                          "Explore stays in trending destinations",
+                          style: TextStyle(
+                              fontSize: 33,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.01,
+                        ),
+                        const Text(
+                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit commodo consequat. ",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.white),
+                        ),
+                        const Text(
+                          "exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. fugiat nulla pariatur.",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.white),
+                        ),
+                        const Text(
+                          "exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. fugiat nulla pariatur.",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.white),
+                        ),
+                      ],
                     ),
-                    BookingWidget(),
+                    BookingWidget()
                   ],
                 ),
-              ),
+              ]),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.04,
               ),
@@ -172,15 +202,9 @@ class HomeView extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.15,
               ),
-              WebsiteFooter(),
+              const WebsiteFooter(),
             ],
           ),
         ));
   }
-
-  // PopupMenuItem _buildPopupMenuItem(String title) {
-  //   return PopupMenuItem(
-  //     child: Text(title),
-  //   );
-  // }
 }

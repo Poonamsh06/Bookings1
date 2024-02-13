@@ -149,7 +149,7 @@ class BookingText extends StatelessWidget {
     return const Text(
       'Booking Form',
       style: TextStyle(
-          color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),
+          color: Colors.black, fontSize: 35, fontWeight: FontWeight.bold),
     );
   }
 }

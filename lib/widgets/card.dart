@@ -14,13 +14,13 @@ class CardWidget extends StatelessWidget {
         border: Border.all(color: Colors.grey, width: 1),
       ),
       height: MediaQuery.of(context).size.height * 0.45,
-      width: MediaQuery.of(context).size.width * 0.25,
+      width: MediaQuery.of(context).size.width * 0.27,
       child: Expanded(
         child: Column(children: [
           Image.asset(
             image,
             height: MediaQuery.of(context).size.height * 0.3,
-            width: MediaQuery.of(context).size.width * 0.25,
+            width: MediaQuery.of(context).size.width * 0.27,
             fit: BoxFit.fill,
           ),
           Padding(
@@ -38,25 +38,25 @@ class CardWidget extends StatelessWidget {
                     const Text(
                       "The Golden city, is a city in the Indian ",
                       softWrap: true,
-                      style:
-                          TextStyle(fontWeight: FontWeight.normal, fontSize: 9),
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal, fontSize: 12),
                     ),
                     const Text(
                       "state of Rajasthan, located 575 kilometres ",
                       softWrap: true,
-                      style:
-                          TextStyle(fontWeight: FontWeight.normal, fontSize: 9),
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal, fontSize: 12),
                     ),
                     const Text(
                       " west of the state capital Jaipur.",
                       softWrap: true,
-                      style:
-                          TextStyle(fontWeight: FontWeight.normal, fontSize: 9),
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal, fontSize: 12),
                     ),
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Container(
                     child: Padding(
                       padding: EdgeInsets.all(4.0),

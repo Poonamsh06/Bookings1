@@ -1,4 +1,5 @@
-import 'package:bookings/views/bookings/Bookings.dart';
+import 'package:bookings/views/bookings/bookings.dart';
+import 'package:bookings/views/home_view.dart';
 import 'package:bookings/views/login_view.dart';
 import 'package:bookings/widgets/text.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +26,12 @@ class AppBarWidget extends StatelessWidget {
           ),
 
           //call text widget
-          Padding(
-            padding: const EdgeInsets.only(top: 28),
-            child: Container(child: const Text1(text: 'Home')),
+          InkWell(
+            onTap: () => Get.to(() => HomeView()),
+            child: Padding(
+              padding: EdgeInsets.only(top: 28),
+              child: const Text1(text: 'Home'),
+            ),
           ),
 
           SizedBox(
@@ -35,7 +39,7 @@ class AppBarWidget extends StatelessWidget {
           ),
           //call text widget
           InkWell(
-            onTap: () => Get.to(BookingsPage()),
+            onTap: () => Get.to(() => BookingsPage()),
             child: const Padding(
               padding: EdgeInsets.only(top: 28),
               child: Text1(text: 'Bookings'),

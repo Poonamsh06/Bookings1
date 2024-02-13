@@ -12,15 +12,15 @@ class SignupView extends StatelessWidget {
     return Container(
         height: MediaQuery.of(context).size.height * 0.9,
         width: MediaQuery.of(context).size.width * 0.4,
-        padding: EdgeInsets.only(top: 15),
+        padding: const EdgeInsets.only(top: 15),
         alignment: Alignment.center,
         child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
-                icon: Icon(Icons.arrow_back),
-                color: Color.fromARGB(255, 8, 68, 116),
+                icon: const Icon(Icons.arrow_back),
+                color: const Color.fromARGB(255, 8, 68, 116),
                 onPressed: () {
                   Get.back();
                 },
@@ -45,7 +45,7 @@ class SignupView extends StatelessWidget {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.09,
                     width: MediaQuery.of(context).size.width * 0.3,
-                    child: LoginFormField(labelText: 'Email'),
+                    child: const LoginFormField(labelText: 'Email'),
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.04,
@@ -53,7 +53,7 @@ class SignupView extends StatelessWidget {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.09,
                     width: MediaQuery.of(context).size.width * 0.3,
-                    child: LoginFormField(labelText: 'Password'),
+                    child: const LoginFormField(labelText: 'Password'),
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.07,
@@ -65,10 +65,10 @@ class SignupView extends StatelessWidget {
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(8),
-                        color: Color.fromARGB(255, 8, 68, 116)),
+                        color: const Color.fromARGB(255, 8, 68, 116)),
                     height: MediaQuery.of(context).size.height * 0.09,
                     width: MediaQuery.of(context).size.width * 0.3,
-                    child: Text(
+                    child: const Text(
                       'Submit',
                       style: TextStyle(
                           fontSize: 20,
@@ -82,7 +82,7 @@ class SignupView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Already have an account?",
                         style: TextStyle(
                             color: Colors.black,
@@ -98,7 +98,7 @@ class SignupView extends StatelessWidget {
                             content: LoginPage(),
                           ),
                         ),
-                        child: Text(
+                        child: const Text(
                           " Login ",
                           style: TextStyle(
                               color: Color.fromARGB(255, 8, 68, 116),
@@ -111,14 +111,14 @@ class SignupView extends StatelessWidget {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.08,
                   ),
-                  Text(
+                  const Text(
                     "By continuing, you have read and agree to our Terms and Conditions,",
                     style: TextStyle(
                         color: Color.fromARGB(255, 139, 137, 137),
                         fontSize: 13,
                         fontWeight: FontWeight.normal),
                   ),
-                  Text(
+                  const Text(
                     "Privacy Statement, and Expedia Rewards Terms & Conditions.",
                     style: TextStyle(
                         color: Color.fromARGB(255, 139, 137, 137),

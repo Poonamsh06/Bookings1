@@ -55,5 +55,29 @@
       });
     });
   </script>
+ <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAK4YMWKXgxPZxAu2MK4j8GSG5rNHVZ3LU",
+    authDomain: "bookingsi-56961.firebaseapp.com",
+    projectId: "bookingsi-56961",
+    storageBucket: "bookingsi-56961.appspot.com",
+    messagingSenderId: "107701451289",
+    appId: "1:107701451289:web:65cc7d14b9d201f1344888",
+    measurementId: "G-450QV7J4SQ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
 </body>
 </html>

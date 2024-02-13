@@ -1,3 +1,4 @@
+import 'package:bookings/controller/booking_controller.dart';
 import 'package:bookings/views/home_view.dart';
 import 'package:bookings/views/login_view.dart';
 import 'package:bookings/widgets/app_bar.dart';
@@ -7,12 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BookingsPage extends StatelessWidget {
-  const BookingsPage({super.key});
+  final controller = Get.put(BookingsPageController());
+
+  BookingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 124, 144, 159),
       appBar: PreferredSize(
           preferredSize: Size(
             MediaQuery.of(context).size.width,
@@ -49,12 +51,20 @@ class BookingsPage extends StatelessWidget {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.01,
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           BookingField(
-                              labelText: 'Name', hintText: 'First Name'),
+                              icon: Icon(Icons.person),
+                              onChanged: (value) =>
+                                  controller.firstName.value = value,
+                              //onChanged: controller.firstName,
+                              labelText: 'Name:',
+                              hintText: 'First Name'),
                           BookingField(
+                            icon: Icon(Icons.person),
+                            onChanged: (value) =>
+                                controller.lastName.value = value,
                             hintText: 'Last Name',
                             labelText: '',
                           ),
@@ -63,16 +73,22 @@ class BookingsPage extends StatelessWidget {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.08,
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           BookingField(
+                            icon: Icon(Icons.mail),
+                            onChanged: (value) =>
+                                controller.email.value = value,
                             hintText: 'Enter your E-mail',
-                            labelText: 'E-mail',
+                            labelText: 'E-mail:',
                           ),
                           BookingField(
-                            hintText: 'XXXXXXXXXX',
-                            labelText: 'Phone number',
+                            icon: Icon(Icons.phone_android),
+                            onChanged: (value) =>
+                                controller.phoneNumber.value = value,
+                            hintText: 'Enter your phone no.',
+                            labelText: 'Phone number:',
                           ),
                         ],
                       ),
@@ -81,7 +97,23 @@ class BookingsPage extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(BookingPage2());
+                          if (controller.firstName.value.isEmpty ||
+                              controller.lastName.value.isEmpty ||
+                              controller.email.value.isEmpty ||
+                              controller.phoneNumber.value.isEmpty) {
+                            Get.snackbar('Error', 'All fields are required',
+                                backgroundColor: Colors.white,
+                                maxWidth:
+                                    MediaQuery.of(context).size.width * 0.4,
+                                snackStyle: SnackStyle.FLOATING,
+                                margin: EdgeInsets.all(20));
+                          } else {
+                            controller.saveFormDataToFirestore(context);
+                            Get.to(() => BookingPage2());
+                          }
+                          // controller.saveFormDataToFirestore(context);
+
+                          // Get.to(() => BookingPage2());
                         },
                         child: Container(
                             alignment: Alignment.center,
@@ -116,12 +148,13 @@ class BookingsPage extends StatelessWidget {
 }
 
 class BookingPage2 extends StatelessWidget {
-  const BookingPage2({super.key});
+  final controller = Get.put(BookingsPageController());
+  BookingPage2({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 124, 144, 159),
+        //  backgroundColor: Color.fromARGB(255, 124, 144, 159),
         appBar: PreferredSize(
             preferredSize: Size(
               MediaQuery.of(context).size.width,
@@ -156,14 +189,26 @@ class BookingPage2 extends StatelessWidget {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.02,
                           ),
-                          const Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               BookingField(
-                                hintText: 'Enter your Address',
-                                labelText: 'Address',
+                                onChanged: (value) =>
+                                    controller.rooms.value = value,
+                                icon: const Icon(
+                                  Icons.bed,
+                                  color: Colors.black,
+                                ),
+                                hintText: 'Enter no. of rooms',
+                                labelText: 'Room',
                               ),
                               BookingField(
+                                onChanged: (value) =>
+                                    controller.guests.value = value,
+                                icon: const Icon(
+                                  Icons.person,
+                                  color: Colors.black,
+                                ),
                                 hintText: 'Enter No. of Guests',
                                 labelText: 'No. of Guests',
                               ),
@@ -176,10 +221,14 @@ class BookingPage2 extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               BookingField1(
+                                onChanged: (value) =>
+                                    controller.checkInTime.value = value,
                                 labelText: 'mm/dd/yy',
                                 text: 'Check-in Date',
                               ),
                               BookingField2(
+                                onChanged: (value) =>
+                                    controller.checkInTime.value = value,
                                 labelText: '00 : 00',
                                 text: 'Check-in Time',
                               ),
@@ -192,6 +241,8 @@ class BookingPage2 extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               BookingField1(
+                                onChanged: (value) =>
+                                    controller.checkOutTime.value = value,
                                 labelText: 'mm/dd/yy',
                                 text: 'Check-out date',
                               ),
@@ -199,6 +250,8 @@ class BookingPage2 extends StatelessWidget {
                               //   width: MediaQuery.of(context).size.width * 0.02,
                               // ),
                               BookingField2(
+                                onChanged: (value) =>
+                                    controller.checkOutTime.value = value,
                                 labelText: '00 : 00',
                                 text: 'Check-out Time',
                               ),
@@ -252,7 +305,26 @@ class BookingPage2 extends StatelessWidget {
                                 alignment: Alignment.bottomRight,
                                 child: InkWell(
                                   onTap: () {
-                                    Get.to(BookingsPage3());
+                                    if (controller.guests.value.isEmpty ||
+                                        controller.rooms.value.isEmpty ||
+                                        controller.checkInTime.value.isEmpty ||
+                                        controller.checkOutTime.value.isEmpty) {
+                                      // Show an error message or toast indicating that all fields are required
+                                      // Example using GetX: Get.snackbar('Error', 'All fields are required');
+                                      Get.snackbar(
+                                          'Error', 'All fields are required',
+                                          backgroundColor: Colors.white,
+                                          maxWidth: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.4,
+                                          snackStyle: SnackStyle.FLOATING,
+                                          margin: EdgeInsets.all(20));
+                                    } else {
+                                      controller
+                                          .saveFormDataToFirestore(context);
+                                      Get.to(() => BookingsPage3());
+                                    }
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(right: 70),
@@ -297,12 +369,13 @@ class BookingPage2 extends StatelessWidget {
 }
 
 class BookingsPage3 extends StatelessWidget {
-  const BookingsPage3({super.key});
+  final controller = Get.put(BookingsPageController());
+  BookingsPage3({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 124, 144, 159),
+      // backgroundColor: Color.fromARGB(255, 124, 144, 159),
       appBar: PreferredSize(
           preferredSize: Size(
             MediaQuery.of(context).size.width,
@@ -332,14 +405,26 @@ class BookingsPage3 extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           BookingField(
+                            onChanged: (value) =>
+                                controller.address.value = value,
+                            icon: Icon(
+                              Icons.location_city,
+                              color: Colors.black,
+                            ),
                             hintText: 'Enter your Address',
                             labelText: 'Address',
                           ),
                           BookingField(
+                            icon: Icon(
+                              Icons.perm_identity,
+                              color: Colors.black,
+                            ),
+                            onChanged: (value) =>
+                                controller.identityProof.value = value,
                             hintText: 'Enter Identity proof',
                             labelText: 'Identity proof',
                           ),
@@ -348,16 +433,22 @@ class BookingsPage3 extends StatelessWidget {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.08,
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           BookingField(
+                            icon: Icon(Icons.mail),
+                            onChanged: (value) =>
+                                controller.email.value = value,
                             hintText: 'Enter your E-mail',
-                            labelText: 'E-mail',
+                            labelText: 'E-mail:',
                           ),
                           BookingField(
-                            hintText: 'XXXXXXXXXX',
-                            labelText: 'Phone number',
+                            icon: Icon(Icons.phone_android),
+                            onChanged: (value) =>
+                                controller.phoneNumber.value = value,
+                            hintText: 'Enter your phone no.',
+                            labelText: 'Phone number:',
                           ),
                         ],
                       ),
@@ -405,7 +496,28 @@ class BookingsPage3 extends StatelessWidget {
                               padding: const EdgeInsets.only(right: 70),
                               child: InkWell(
                                 onTap: () {
-                                  Get.to(HomeView());
+                                  if (controller.firstName.value.isEmpty ||
+                                      controller.lastName.value.isEmpty ||
+                                      controller.email.value.isEmpty ||
+                                      controller.phoneNumber.value.isEmpty) {
+                                    Get.snackbar(
+                                        'Error', 'All fields are required',
+                                        backgroundColor: Colors.white,
+                                        maxWidth:
+                                            MediaQuery.of(context).size.width *
+                                                04);
+                                  } else {
+                                    controller.saveFormDataToFirestore(context);
+                                    Get.snackbar('Success',
+                                        'Form data saved successfully',
+                                        backgroundColor: Colors.white,
+                                        maxWidth:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
+                                        snackStyle: SnackStyle.FLOATING,
+                                        margin: EdgeInsets.all(20));
+                                    Get.to(() => HomeView());
+                                  }
                                 },
                                 child: Container(
                                     alignment: Alignment.center,
